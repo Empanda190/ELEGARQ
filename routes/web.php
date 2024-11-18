@@ -8,7 +8,8 @@ Route::get('/', function () {
 });
 
 Route::get('principalel',[elegarqcontroller::class,'principalel'])->name('principalel');
-
+Route::get('index',[elegarqcontroller::class,'index'])->name('index');
+Route::get('login',[elegarqcontroller::class,'login'])->name('login');
 
 
 
