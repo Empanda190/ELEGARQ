@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Det_comp_mat extends Model
+class Registro_Mats extends Model
 {
     use HasFactory;
-    protected $primaryKey = ['idcomt','idcmt'];
-    protected $fillable = ['idcomt','idcmt','costo','cant'];
+    protected $primaryKey = 'idcot';
+    protected $fillable = ['idcot','idcmt','cant','precio'];
 }

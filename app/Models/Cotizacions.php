@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Registro_Mat extends Model
+class Cotizacions extends Model
 {
     use HasFactory;
     protected $primaryKey = 'idcot';
-    protected $fillable = ['idcot','idcmt','cant','precio'];
+    protected $fillable = ['idcot','idcli','fecha','vigencia','descripcion','total'];
 }

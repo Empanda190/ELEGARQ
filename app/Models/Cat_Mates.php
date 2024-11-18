@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cat_Mate extends Model
+class Cat_Mates extends Model
 {
     use HasFactory;
     protected $primaryKey = 'idcmt';

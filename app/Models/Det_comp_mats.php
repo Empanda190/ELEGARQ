@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Asignacion extends Model
+class Det_comp_mats extends Model
 {
     use HasFactory;
-    protected $primaryKey = ['idcot','idenc'];
-    protected $fillable = ['idcot','idenc'];
+    protected $primaryKey = ['idcomt','idcmt'];
+    protected $fillable = ['idcomt','idcmt','costo','cant'];
 }
