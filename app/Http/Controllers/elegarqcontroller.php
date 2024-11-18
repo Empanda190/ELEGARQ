@@ -64,4 +64,13 @@ class elegarqcontroller extends Controller
         return view('elaborar_cronograma')
                 ->with('cotizacion',$cotizacion);
     }
+    public function seguir_proyecto()
+    {
+        $cotizacion = Cotizacions::orderby('idcot', 'asc')
+                                ->get();
+
+        return view('seguir_proyecto')
+                ->with('cotizacion',$cotizacion);
+    }
+
 }
