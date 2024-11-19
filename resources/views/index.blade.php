@@ -52,24 +52,27 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Inicio</a>
+                    <a href="index" class="nav-item nav-link">Inicio</a>
                     <a href="about.html" class="nav-item nav-link">Cotización</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cátalogos</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="blog.html" class="dropdown-item">Catálogo de Materiales</a>
-                            <a href="single.html" class="dropdown-item">Catálogo de Proveedores </a>
+                            <a href="blog.html" class="dropdown-item">Materiales</a>
+                            <a href="single.html" class="dropdown-item">Proveedores </a>
                         </div>
                     </div>
                     <a href="service.html" class="nav-item nav-link">Registro de Pagos</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Proyectos</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="seguimiento.html" class="dropdown-item">Seguimiento de Proyectos</a>
-                            <a href="registro.html" class="dropdown-item">Registro de Proyectos</a>
+                            <a href="seguir_proyecto" class="dropdown-item">Seguimiento de Proyectos</a>
+                            <a href="registrar_proyecto" class="dropdown-item">Registro de Proyectos</a>
                         </div>
                     </div>
-                    
+                    <div>
+                    <a href="elaborar_cronograma" class="nav-item nav-link">Elaborar cronograma</a>
+                    </div>
+            
                 </div>
                
             </div>
