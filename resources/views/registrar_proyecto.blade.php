@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <meta charset="utf-8">
     <title>ElegArq-Inicio</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -79,12 +78,21 @@
         </nav>
     </div>
     <!-- Navbar End -->
+    @if (Session::has('mensaje'))
+          <div>
+        <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Felicidades</strong> {{ Session::get('mensaje') }}
+        </div>
+     </div>
+    @endif
 
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Registrar Proyecto</h2>
-        <form>
+        <form action = "{{route('saveregisproy')}}" method= "POST">
+        {{ csrf_field() }}
             <!-- Input Número de Cotización -->
             <tr>
                 <td>Número de cotización</td>

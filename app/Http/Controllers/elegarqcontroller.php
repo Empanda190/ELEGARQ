@@ -39,12 +39,12 @@ class elegarqcontroller extends Controller
     }
     public function saveregisproy(Request $request)
     {
-        $this->validate($request,[   
+        /*$this->validate($request,[   
             'idcot'=>'required|numeric|integer',
 			'fecha_ini'=>'required',
 			'fecha_fin'=>'required',
             'Ubicacipn'=>'required',
-        ]);
+        ]);*/
 
         $Proyectos = new Proyectos;
         $Proyectos ->idcot = $request->idcot;
@@ -53,7 +53,8 @@ class elegarqcontroller extends Controller
         $Proyectos ->Ubicacipn = $request->Ubicacipn;
         $Proyectos ->save(); 
 
-        return "REGISTRO GUARDADO";
+        Session::flash('mensaje', "La cotizacion número $request->idcot ha sido registrada dentro de proyectos");
+        return redirect()->route('registrar_proyecto');
 
     }
     public function elaborar_cronograma()
@@ -70,13 +71,11 @@ class elegarqcontroller extends Controller
     }
     public function savecrono(Request $request)
     {
-        $this->validate($request,[   
-            'idcot'=>'required|numeric|integer',
+        /*$this->validate($request,[   
 			'actividad'=>'required',
 			'fecha_inicio'=>'required',
             'fecha_ter'=>'required',
-            'idenc'=>'required|numeric|integer',
-        ]);
+        ]);*/
 
         $Cronogramas = new Cronogramas;
         $Cronogramas ->idcot = $request->idcot;

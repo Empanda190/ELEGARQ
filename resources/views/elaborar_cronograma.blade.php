@@ -83,7 +83,8 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Elaborar Cronograma</h2>
-        <form>
+        <form action = "{{route('savecrono')}}" method= "POST">
+        {{ csrf_field() }}
             <!-- Seleccionar Proyecto -->
             <div class="mb-3">
             <tr>
