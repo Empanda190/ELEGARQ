@@ -43,7 +43,7 @@ class elegarqcontroller extends Controller
     public function saveregisproy(Request $request)
     {
         $this->validate($request,[   
-            'ide'=>'required|numeric|integer',
+            'idcot'=>'required|numeric|integer',
 			'fecha_ini'=>'required',
 			'fecha_fin'=>'required',
             'Ubicacipn'=>'required',
@@ -67,6 +67,22 @@ class elegarqcontroller extends Controller
         return view('elaborar_cronograma')
                 ->with('cotizacion',$cotizacion)
                 ->with('encargado',$encargado);
+    }
+    public function savecrono(Request $request)
+    {
+        $this->validate($request,[   
+            'idcot'=>'required|numeric|integer',
+			'actividad'=>'required',
+			'fecha_inicio'=>'required',
+            'fecha_ter'=>'required',
+        ]);
+
+        $Cronogramas = new Cronogramas;
+        $Cronogramas ->idcot = $request->idcot;
+        $Cronogramas ->actividad = $request->actividad;
+        $Cronogramas ->fecha_inicio = $request->fecha_inicio;
+        $Cronogramas ->fecha_ter = $request->fecha_ter;
+
     }
     public function seguir_proyecto()
     {

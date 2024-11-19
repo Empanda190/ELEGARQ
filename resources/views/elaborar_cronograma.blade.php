@@ -78,17 +78,14 @@
         </nav>
     </div>
     <!-- Navbar End -->
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elaborar Cronograma</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Elaborar Cronograma</h2>
         <form>
             <!-- Seleccionar Proyecto -->
+            <div class="mb-3">
             <tr>
                 <td> Seleccione un número de proyecto</td>
                 <td><select  class="form-select" name = 'idcot'>
@@ -97,6 +94,7 @@
                 @endforeach
 	            </select>
 	        </td></tr>
+            </div>
 
             <!-- Asignar Actividades -->
             <div class="mb-3">
@@ -125,7 +123,9 @@
 	        </td></tr>
 
             <!-- Botón Guardar -->
+             <div>
             <button type="submit" class="btn btn-primary">Guardar Información</button>
+            </div>
         </form>
     </div>
 
