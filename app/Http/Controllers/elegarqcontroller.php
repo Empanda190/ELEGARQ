@@ -53,8 +53,7 @@ class elegarqcontroller extends Controller
         $Proyectos ->Ubicacipn = $request->Ubicacipn;
         $Proyectos ->save(); 
 
-        Session::flash('mensaje', "La cotización con clave $request->idcot ha sido dado de alta como proyecto");
-        return redirect()->route('registrar_proyecto');
+        return "REGISTRO GUARDADO";
 
     }
     public function elaborar_cronograma()

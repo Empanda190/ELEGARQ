@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <div>
-        <div class="alert alert-dismissible alert-success">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Felicidades</strong> {{ Session::get('mensaje') }}
-        </div>
-    </div>
 
     <meta charset="utf-8">
     <title>ElegArq-Inicio</title>
@@ -94,7 +88,7 @@
             <!-- Input Número de Cotización -->
             <tr>
                 <td>Número de cotización</td>
-                <td><select  class="form-select" name = 'iddep'>
+                <td><select  class="form-select" name = 'idcot'>
                 @foreach($cotizacion as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
                 @endforeach
@@ -159,6 +153,7 @@
             <div>
             <button type="submit" class="btn btn-primary">Guardar los Datos</button>
             </div>
+    </div>
         </form>
     </div>
 
