@@ -54,6 +54,12 @@ class elegarqcontroller extends Controller
         $Proyectos ->fecha_ini = $request->fecha_ini;
         $Proyectos ->fecha_fin = $request->fecha_fin;
         $Proyectos ->Ubicacipn = $request->Ubicacipn;
+        $Proyectos ->save(); 
+
+        return response()->json([
+            'message' => 'Proyecto guardado con éxito',
+            'data' => $Proyectos
+        ], 201);
 
     }
     public function elaborar_cronograma()
@@ -75,6 +81,7 @@ class elegarqcontroller extends Controller
 			'actividad'=>'required',
 			'fecha_inicio'=>'required',
             'fecha_ter'=>'required',
+            'idenc'=>'required|numeric|integer',
         ]);
 
         $Cronogramas = new Cronogramas;
@@ -82,6 +89,13 @@ class elegarqcontroller extends Controller
         $Cronogramas ->actividad = $request->actividad;
         $Cronogramas ->fecha_inicio = $request->fecha_inicio;
         $Cronogramas ->fecha_ter = $request->fecha_ter;
+        $Cronogramas ->idenc = $request->idenc;
+        $Cronogramas ->save(); 
+
+        return response()->json([
+            'message' => 'Cronograma guardado con éxito',
+            'data' => $Cronogramas
+        ], 201);
 
     }
     public function seguir_proyecto()

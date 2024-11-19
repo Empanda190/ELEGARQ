@@ -98,18 +98,36 @@
 
             <!-- Asignar Actividades -->
             <div class="mb-3">
-                <label for="asignarActividades" class="form-label">Asignar Actividades</label>
-                <textarea class="form-control" id="asignarActividades" rows="3" placeholder="Escribe las actividades"></textarea>
+                <tr>
+                <td width=100>Asignar actividades</td>
+                <td width=200>
+                @if($errors->first('actividad'))
+                    <p class="text-warning">{{$errors->first('actividad')}}</p>
+                @endif
+                <input type = 'text' class="form-control" name='actividad' placeholder= 'Ingresa una actividad' value="{{old('actividad')}}" rows="3"></td>
+                </tr>
             </div>
 
             <!-- Establecer Fechas -->
             <div class="mb-3">
-                <label for="fechaInicioActividad" class="form-label">Fecha de Inicio</label>
-                <input type="date" class="form-control" id="fechaInicioActividad">
+            <tr>
+            <td width=100>Fecha de inicio</td>
+            <td width=200>
+            @if($errors->first('fecha_inicio'))
+                <p class="text-warning">{{$errors->first('fecha_inicio')}}</p>
+            @endif
+            <input type = 'date' class="form-control" name='fecha_inicio' placeholder= 'dd/mm/aaaa' value="{{old('fecha_inicio')}}"></td>
+            </tr>
             </div>
             <div class="mb-3">
-                <label for="fechaFinActividad" class="form-label">Fecha de Fin</label>
-                <input type="date" class="form-control" id="fechaFinActividad">
+            <tr>
+            <td width=100>Fecha de termino</td>
+            <td width=200>
+            @if($errors->first('fecha_ter'))
+                <p class="text-warning">{{$errors->first('fecha_ter')}}</p>
+            @endif
+            <input type = 'date' class="form-control" name='fecha_ter' placeholder= 'dd/mm/aaaa' value="{{old('fecha_ter')}}"></td>
+            </tr>
             </div>
 
             <!-- Asignar Personal para Actividades -->

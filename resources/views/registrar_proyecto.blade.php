@@ -127,7 +127,7 @@
             @if($errors->first('Ubicacipn'))
                 <p class="text-warning">{{$errors->first('Ubicacipn')}}</p>
             @endif
-            <input type = 'text' class="form-control" name='Ubicacipn' placeholder= 'dd/mm/aaaa' value="{{old('Ubicacipn')}}"></td>
+            <input type = 'text' class="form-control" name='Ubicacipn'  value="{{old('Ubicacipn')}}"></td>
             </tr>
 
             <!-- Botón Guardar -->
