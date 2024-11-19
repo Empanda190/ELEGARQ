@@ -18,6 +18,7 @@ use App\Models\Registro_Pagos;
 use App\Models\Servicios;
 use App\Models\TipMats;
 
+use Session;
 class elegarqcontroller extends Controller
 {
     public function principalel()
@@ -56,10 +57,8 @@ class elegarqcontroller extends Controller
         $Proyectos ->Ubicacipn = $request->Ubicacipn;
         $Proyectos ->save(); 
 
-        return response()->json([
-            'message' => 'Proyecto guardado con éxito',
-            'data' => $Proyectos
-        ], 201);
+        Session::flash('mensaje', "La cotización con clave $request->idcot ha sido dado de alta como proyecto");
+        return redirect()->route('registrar_proyecto');
 
     }
     public function elaborar_cronograma()

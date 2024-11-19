@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <div>
+        <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Felicidades</strong> {{ Session::get('mensaje') }}
+        </div>
+    </div>
+
     <meta charset="utf-8">
     <title>ElegArq-Inicio</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -97,7 +104,7 @@
             <!-- Mostrar Detalles de la Cotización -->
             <div class="mb-3">
                 <label for="detallesCotizacion" class="form-label">Detalles de la Cotización</label>
-                <textarea class="form-control" name="detallesCotizacion" value='' rows="3" placeholder="Mostrar detalles de la cotización" disabled></textarea>
+                <textarea class="form-control" name="detallesCotizacion"  rows="3" placeholder="Mostrar detalles de la cotización" disabled></textarea>
             </div>
 
             <!-- Ingresar Fecha de Inicio -->
