@@ -7,7 +7,7 @@ use App\Models\Cat_Provs;
 use App\Models\Clientes;
 use App\Models\Compra_Mats;
 use App\Models\Cot_Sers;
-use App\Models\Cotizacions;
+use App\Models\Cotizaciones;
 use App\Models\Cronogramas;
 use App\Models\Det_comp_mats;
 use App\Models\Mat_Detalles;
@@ -21,10 +21,6 @@ use App\Models\TipMats;
 use Session;
 class elegarqcontroller extends Controller
 {
-    public function principalel()
-    {
-        return view ('principalel');
-    }
     public function index()
     {
         return view ('index');
@@ -35,7 +31,7 @@ class elegarqcontroller extends Controller
     }
     public function registrar_proyecto()
     {
-        $cotizacion = Cotizacions::orderby('idcot', 'asc')
+        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
                                 ->get();
 
         return view('registrar_proyecto')
@@ -63,7 +59,7 @@ class elegarqcontroller extends Controller
     }
     public function elaborar_cronograma()
     {
-        $cotizacion = Cotizacions::orderby('idcot', 'asc')
+        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
                                 ->get();
 
         $encargado = Personals::orderby('idenc', 'asc')
@@ -99,7 +95,7 @@ class elegarqcontroller extends Controller
     }
     public function seguir_proyecto()
     {
-        $cotizacion = Cotizacions::orderby('idcot', 'asc')
+        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
                                 ->get();
 
         return view('seguir_proyecto')

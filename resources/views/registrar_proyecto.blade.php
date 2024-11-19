@@ -93,7 +93,7 @@
         <form>
             <!-- Input Número de Cotización -->
             <tr>
-                <td> Seleccione un número de cotización</td>
+                <td>Número de cotización</td>
                 <td><select  class="form-select" name = 'iddep'>
                 @foreach($cotizacion as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
@@ -103,8 +103,26 @@
 
             <!-- Mostrar Detalles de la Cotización -->
             <div class="mb-3">
-                <label for="detallesCotizacion" class="form-label">Detalles de la Cotización</label>
-                <textarea class="form-control" name="detallesCotizacion"  rows="3" placeholder="Mostrar detalles de la cotización" disabled></textarea>
+            <table border = 1>
+        <tr>
+            <td>Número de cotizacion</td>
+            <td>Cliente</td>
+            <td>Fecha</td>
+            <td>Vigencia</td>
+            <td>Descripcion</td>
+            <td>Total</td>
+        </tr>
+        @foreach($cotizacion as $e)
+        <tr>
+            <td>{{$e->idcot}}</td>
+            <td>{{$e->idcli}}</td>
+            <td>{{$e->fecha}}</td>
+            <td>{{$e->vigencia}}</td>
+            <td>{{$e->descripcion}}</td>
+            <td>{{$e->total}}</td>
+            <td>
+            @endforeach
+            </table>
             </div>
 
             <!-- Ingresar Fecha de Inicio -->

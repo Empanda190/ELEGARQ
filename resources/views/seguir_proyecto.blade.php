@@ -86,8 +86,8 @@
         <form>
             <!-- Seleccionar Proyecto -->
             <tr>
-                <td> Seleccione un número de cotización</td>
-                <td><select  class="form-select" name = 'iddep'>
+                <td> Número de cotización</td>
+                <td><select  class="form-select" name = 'idcot'>
                 @foreach($cotizacion as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
                 @endforeach
@@ -96,8 +96,25 @@
 
             <!-- Mostrar Cronograma -->
             <div class="mb-3">
-                <label for="mostrarCronograma" class="form-label">Cronograma</label>
-                <textarea class="form-control" id="mostrarCronograma" rows="5" placeholder="Mostrar cronograma" disabled></textarea>
+            <table border = 1>
+        <tr>
+            <td>Número de cotizacion</td>
+            <td>Encargado</td>
+            <td>Fecha Inicio</td>
+            <td>Fecha Termino</td>
+            <td>Status</td>
+            <td>Actualizar</td>
+        </tr>
+        @foreach($cotizacion as $e)
+        <tr>
+            <td>{{$e->idcot}}</td>
+            <td>{{$e->idenc}}</td>
+            <td>{{$e->fecha_ini}}</td>
+            <td>{{$e->fecha_fin}}</td>
+            <td>{{$e->status}}</td>
+            <td>
+            @endforeach
+            </table>
             </div>
             <!-- Botón Guardar -->
              <div>
