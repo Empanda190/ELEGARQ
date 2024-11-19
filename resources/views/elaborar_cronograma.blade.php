@@ -13,7 +13,7 @@
             <!-- Seleccionar Proyecto -->
             <tr>
                 <td> Seleccione un número de proyecto</td>
-                <td><select  class="form-select" name = 'iddep'>
+                <td><select  class="form-select" name = 'idcot'>
                 @foreach($cotizacion as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
                 @endforeach
@@ -37,10 +37,14 @@
             </div>
 
             <!-- Asignar Personal para Actividades -->
-            <div class="mb-3">
-                <label for="asignarPersonal" class="form-label">Asignar Personal</label>
-                <input type="text" class="form-control" id="asignarPersonal" placeholder="Nombre del personal asignado">
-            </div>
+            <tr>
+                <td> Seleccione un número de personal</td>
+                <td><select  class="form-select" name = 'idenc'>
+                @foreach($encargado as $enc)
+                    <option value = '{{$enc->idenc}}'>{{$enc->idenc}}</option>
+                @endforeach
+	            </select>
+	        </td></tr>
 
             <!-- Botón Guardar -->
             <button type="submit" class="btn btn-primary">Guardar Información</button>

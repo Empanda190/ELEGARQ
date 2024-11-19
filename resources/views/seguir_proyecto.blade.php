@@ -25,13 +25,6 @@
                 <label for="mostrarCronograma" class="form-label">Cronograma</label>
                 <textarea class="form-control" id="mostrarCronograma" rows="5" placeholder="Mostrar cronograma" disabled></textarea>
             </div>
-
-            <!-- Actualizar Estatus de Actividades -->
-            <div class="mb-3">
-                <label for="estatusActividades" class="form-label">Actualizar Estatus de Actividades</label>
-                <input type="text" class="form-control" id="estatusActividades" placeholder="Escribe el estatus de las actividades">
-            </div>
-
             <!-- Botón Guardar -->
             <button type="submit" class="btn btn-primary">Guardar Información</button>
         </form>

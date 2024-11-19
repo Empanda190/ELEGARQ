@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ElegArq-Inicio</title>
+    <title>ElegArq-Cotización</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,7 +36,6 @@
                     <small><i class="fa fa-envelope mr-2"></i>rbtvzq@gmail.com</small>
                 </div>
             </div>
-            
         </div>
     </div>
     <!-- Topbar End -->
@@ -81,16 +80,60 @@
     <!-- Header Start -->
     <div class="jumbotron jumbotron-fluid mb-5">
         <div class="container text-center py-5">
-            <h1 class="text-primary mb-4">Inicio</h1>
-            <h1 class="text-white display-3 mb-5">ElegArq</h1>
+            <h1 class="text-white display-3">Cotización</h1>
         </div>
     </div>
     <!-- Header End -->
 
-   
-    
 
-    <!-- Footer Start -->
+<!--  Quote Request Start -->
+
+<div class="container-fluid bg-secondary my-10">
+    <div class="container">
+        <div class="row align-items-center">
+        
+            <div class="col-lg-12">
+                <div class="bg-primary py-5 px-4 px-sm-5">
+                    <form class="py-5">
+                        <h1 class="mb-4">Número de cotización: </h1>
+                        <div class="form-group">
+                            <input type="text" class="form-control border-0 p-4" value="1" readonly />
+                        </div>
+                        <h1 class="mb-4">Selecciones al cliente: </h1>
+                        <div class="form-group">
+                            <select class="custom-select border-0 px-4" style="height: 47px;">
+                                <option selected>cliente 1</option>
+                                <option value="1">Cliente 2</option>
+                                <option value="2">Cliente 3</option>
+                                <option value="3">Cliente 4</option>
+                            </select>
+                        </div>
+                        <h1 class="mb-4">Fecha: </h1>
+                        <div class="form-group">
+                            <input type="date" class="form-control border-0 p-4" />
+                        </div>
+                        <h1 class="mb-4">Vigencia: </h1>
+                        <div class="form-group">
+                            <input type="date" class="form-control border-0 p-4" />
+                        </div>
+                        <h1 class="mb-4">Descripción: </h1>
+                        <div class="form-group">
+                            <input type="textarea" class="form-control border-0 p-4" />
+                        </div>
+                        <h1 class="mb-4">Total: </h1>
+                        <div class="form-group">
+                            <input type="number" class="form-control border-0 p-4" placeholder="50.23" readonly />
+                        </div>
+                        <div>
+                            <button class="btn btn-dark btn-block border-0 py-3" type="submit">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-7 col-md-6">
@@ -128,6 +171,15 @@
     </div>
     <!-- Footer End -->
 
+
+    <!-- Back to Top -->
+<!-- Quote Request Start -->
+
+
+   
+
+
+    
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>

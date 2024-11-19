@@ -33,7 +33,7 @@
             @if($errors->first('fecha_ini'))
                 <p class="text-warning">{{$errors->first('fecha_ini')}}</p>
             @endif
-            <input type = 'date' class="form-control" name='fecha_ini' placeholder= 'dd/mm/aaaa' value="{{old('fecha_ini)}}"></td>
+            <input type = 'date' class="form-control" name='fecha_ini' placeholder= 'dd/mm/aaaa' value="{{old('fecha_ini')}}"></td>
             </tr>
 
             <!-- Ingresar Fecha de Término -->
@@ -43,17 +43,18 @@
             @if($errors->first('fecha_fin'))
                 <p class="text-warning">{{$errors->first('fecha_fin')}}</p>
             @endif
-            <input type = 'date' class="form-control" name='fecha_fin' placeholder= 'dd/mm/aaaa' value="{{old('fecha_finr)}}"></td>
+            <input type = 'date' class="form-control" name='fecha_fin' placeholder= 'dd/mm/aaaa' value="{{old('fecha_fin')}}"></td>
             </tr>
 
             <!-- Teclear Ubicación -->
-            <div class="mb-3">
+            <tr>
+            <td width=100>Ubicacion</td>
+            <td width=200>
             @if($errors->first('Ubicacipn'))
                 <p class="text-warning">{{$errors->first('Ubicacipn')}}</p>
             @endif
-                <label for="ubicacipn" class="form-label">Ubicación</label>
-                <input type="text" class="form-control" name='ubicacion' value='Ubicacipn' placeholder="Teclear ubicación">
-            </div>
+            <input type = 'text' class="form-control" name='Ubicacipn' placeholder= 'dd/mm/aaaa' value="{{old('Ubicacipn')}}"></td>
+            </tr>
 
             <!-- Botón Guardar -->
             <button type="submit" class="btn btn-primary">Guardar los Datos</button>

@@ -61,8 +61,12 @@ class elegarqcontroller extends Controller
         $cotizacion = Cotizacions::orderby('idcot', 'asc')
                                 ->get();
 
+        $encargado = Personals::orderby('idenc', 'asc')
+                                ->get();
+
         return view('elaborar_cronograma')
-                ->with('cotizacion',$cotizacion);
+                ->with('cotizacion',$cotizacion)
+                ->with('encargado',$encargado);
     }
     public function seguir_proyecto()
     {
