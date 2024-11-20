@@ -79,8 +79,6 @@
     </div>
     <!-- Navbar End -->
 
-</head>
-<body>
     <div class="container mt-5">
         <h2 class="text-center">Seguir Proyecto</h2>
         <form>
@@ -88,7 +86,7 @@
             <tr>
                 <td> Número de cotización</td>
                 <td><select  class="form-select" name = 'idcot'>
-                @foreach($cotizacion as $cot)
+                @foreach($proyecto as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
                 @endforeach
 	            </select>
@@ -105,7 +103,7 @@
             <td>Status</td>
             <td>Actualizar</td>
         </tr>
-        @foreach($cotizacion as $e)
+        @foreach($proyecto as $e)
         <tr>
             <td>{{$e->idcot}}</td>
             <td>{{$e->idenc}}</td>

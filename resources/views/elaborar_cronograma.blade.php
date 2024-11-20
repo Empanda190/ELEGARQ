@@ -77,10 +77,6 @@
             </div>
         </nav>
     </div>
-    <!-- Navbar End -->
-
-</head>
-<body>
     <div class="container mt-5">
         <h2 class="text-center">Elaborar Cronograma</h2>
         <form action = "{{route('savecrono')}}" method= "POST">
@@ -149,7 +145,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
@@ -207,5 +202,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
 </body>
 </html>

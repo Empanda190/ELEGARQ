@@ -31,11 +31,18 @@ class elegarqcontroller extends Controller
     }
     public function registrar_proyecto()
     {
-        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
-                                ->get();
+        $cotizacion = \DB::select("SELECT idcot
+        FROM cotizaciones
+        WHERE idcot NOT IN (
+            SELECT idcot
+            FROM proyectos
+        )");
+
+        $numero = Cotizaciones::orderby('idcot', 'asc')->get();
 
         return view('registrar_proyecto')
-                ->with('cotizacion',$cotizacion);
+                ->with('cotizacion',$cotizacion)
+                ->with('numero',$numero);
     }
     public function saveregisproy(Request $request)
     {
@@ -93,11 +100,10 @@ class elegarqcontroller extends Controller
     }
     public function seguir_proyecto()
     {
-        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
+        $proyecto = proyectos::orderby('idcot', 'asc')
                                 ->get();
 
         return view('seguir_proyecto')
-                ->with('cotizacion',$cotizacion);
+                ->with('proyecto',$proyecto);
     }
-
 }

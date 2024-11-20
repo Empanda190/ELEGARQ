@@ -9,8 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <!-- Agrega el favicon usando la función asset -->
-    <link rel="icon" href="{{ asset('img/favicon.ico') }}">
+    
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -20,10 +19,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,64 +36,68 @@
                     <small><i class="fa fa-envelope mr-2"></i>rbtvzq@gmail.com</small>
                 </div>
             </div>
+            
         </div>
     </div>
     <!-- Topbar End -->
 
+
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
-            <h1 class="m-0 display-5 text-primary">ElegArq</h1>
+            
+                <h1 class="m-0 display-5  text-primary">ElegArq</h1>
+        
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="{{ url('/') }}" class="nav-item nav-link">Inicio</a>
-                    <a href="{{ url('/about') }}" class="nav-item nav-link">Cotización</a>
+                    <a href="index" class="nav-item nav-link">Inicio</a>
+                    <a href="about.html" class="nav-item nav-link">Cotización</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cátalogos</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="{{ url('/catalogo/materiales') }}" class="dropdown-item">Catálogo de Materiales</a>
-                            <a href="{{ url('/catalogo/proveedores') }}" class="dropdown-item">Catálogo de Proveedores</a>
+                            <a href="blog.html" class="dropdown-item">Materiales</a>
+                            <a href="single.html" class="dropdown-item">Proveedores </a>
                         </div>
                     </div>
-                    <a href="{{ url('/pagos') }}" class="nav-item nav-link">Registro de Pagos</a>
+                    <a href="service.html" class="nav-item nav-link">Registro de Pagos</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Proyectos</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="{{ url('/proyectos/seguimiento') }}" class="dropdown-item">Seguimiento de Proyectos</a>
-                            <a href="{{ url('/proyectos/registro') }}" class="dropdown-item">Registro de Proyectos</a>
+                            <a href="seguir_proyecto" class="dropdown-item">Seguimiento de Proyectos</a>
+                            <a href="registrar_proyecto" class="dropdown-item">Registro de Proyectos</a>
                         </div>
                     </div>
+                    <div>
+                    <a href="elaborar_cronograma" class="nav-item nav-link">Elaborar cronograma</a>
+                    </div>
+            
                 </div>
+               
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
-
-    <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid mb-5">
-        <div class="container text-center py-5">
-            <h1 class="text-primary mb-4">Inicio</h1>
-            <h1 class="text-white display-3 mb-5">ElegArq</h1>
-        </div>
-    </div>
-    <!-- Header End -->
+    @yield('contenido')
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-7 col-md-6">
-                <div class="row"></div>
+                <div class="row">
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
         <div class="row">
             <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.
-                Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
+                <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved. 
+				
+				<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+				Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+                </p>
             </div>
             <div class="col-lg-6 text-center text-md-right">
                 <ul class="nav d-inline-flex">
@@ -116,23 +119,28 @@
     </div>
     <!-- Footer End -->
 
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
-    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="{{ asset('mail/jqBootstrapValidation.min.js') }}"></script>
-    <script src="{{ asset('mail/contact.js') }}"></script>
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
-    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="js/main.js"></script>
+    
+    @yield('content')
+
 </body>
 
 </html>

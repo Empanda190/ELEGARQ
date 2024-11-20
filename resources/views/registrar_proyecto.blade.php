@@ -86,9 +86,7 @@
         </div>
      </div>
     @endif
-
-</head>
-<body>
+    
     <div class="container mt-5">
         <h2 class="text-center">Registrar Proyecto</h2>
         <form action = "{{route('saveregisproy')}}" method= "POST">
@@ -114,16 +112,16 @@
             <td>Descripcion</td>
             <td>Total</td>
         </tr>
-        @foreach($cotizacion as $e)
-        <tr>
-            <td>{{$e->idcot}}</td>
-            <td>{{$e->idcli}}</td>
-            <td>{{$e->fecha}}</td>
-            <td>{{$e->vigencia}}</td>
-            <td>{{$e->descripcion}}</td>
-            <td>{{$e->total}}</td>
-            <td>
-            @endforeach
+        @if($cotizacion->idcot == $numero)
+<tr>
+    <td>{{ $cotizacion->idcot }}</td>
+    <td>{{ $cotizacion->idcli }}</td>
+    <td>{{ $cotizacion->fecha }}</td>
+    <td>{{ $cotizacion->vigencia }}</td>
+    <td>{{ $cotizacion->descripcion }}</td>
+    <td>{{ $cotizacion->total }}</td>
+</tr>
+@endif
             </table>
             </div>
 
