@@ -9704,3 +9704,21 @@ p,
   padding: 0;
   list-style-type: none;
 }
+
+/*Estilos personalizados para Catalogo de Materiales*/
+.catmat .img-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: auto;
+}
+
+.catmat .img-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Asegura que la imagen llene el espacio */
+  border-radius: 5px;
+}

@@ -106,4 +106,13 @@ class elegarqcontroller extends Controller
         return view('seguir_proyecto')
                 ->with('proyecto',$proyecto);
     }
+
+    //Catalogo de materiales
+    public function catalogo_mat()
+    {
+        // Consulta los materiales junto con su tipo de material (relación a tabla tipmats)
+        $materiales = Cat_Mates::with('TipMats')->get();
+
+        return view('catalogo_mat', compact('materiales'));
+    }
 }

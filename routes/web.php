@@ -16,5 +16,7 @@ Route::get('seguir_proyecto',[elegarqcontroller::class,'seguir_proyecto'])->name
 Route::post('saveregisproy',[elegarqcontroller::class,'saveregisproy'])->name('saveregisproy');
 Route::post('savecrono',[elegarqcontroller::class,'savecrono'])->name('savecrono');
 
+//Rutas del Catalogo de Materiales
+Route::get('catalogo_ma',[elegarqcontroller::class,'catalogo_mat'])->name('catalogo_mat');
 
 

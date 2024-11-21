@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TipMats extends Model
 {
     use HasFactory;
+    protected $table = 'tipmats';
     protected $primaryKey = 'idtma';
-    protected $fillable = ['idtma','nombre'];
+    public $timestamps = false;
+    protected $fillable = ['nombre'];
 }
