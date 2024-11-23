@@ -93,3 +93,33 @@
   min-width: 100px;
   max-width: 100px;
 }
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.form-control, .form-select {
+  border-radius: 5px;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+

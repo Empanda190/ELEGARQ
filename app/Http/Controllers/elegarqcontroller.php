@@ -111,8 +111,35 @@ class elegarqcontroller extends Controller
     public function catalogo_mat()
     {
         // Consulta los materiales junto con su tipo de material (relación a tabla tipmats)
-        $materiales = Cat_Mates::with('TipMats')->get();
+        $materiales = Cat_Mates::with('tipmats')->get();
 
         return view('catalogo_mat', compact('materiales'));
+    }
+
+    public function registro_mats()
+    {
+        // Carga los tipos de material para el formulario
+        $tipos = tipmats::all();
+
+        return view('registro_mats', compact('tipos'));
+    }
+
+    public function guardar_mat(Request $request)
+    {
+        // Validar los datos
+        $request->validate([
+            'nombre' => 'required|max:30',
+            'imagen' => 'required|url',
+            'idtma' => 'required|exists:tipmats,idtma',
+            'caracteristicas' => 'nullable|max:100',
+            'cantidad' => 'required|integer|min:0',
+            'precio' => 'required|numeric|min:0',
+        ]);
+
+        // Crear el material en la base de datos
+        Material::create($request->all());
+
+        // Redirigir con mensaje de éxito
+        return redirect()->route('registro_mats')->with('success', 'Material registrado con éxito.');
     }
 }

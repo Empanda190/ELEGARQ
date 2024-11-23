@@ -16,7 +16,7 @@
             </div>
         @else
             <div class="d-flex justify-content-between mb-3">
-                <button class="btn btn-primary btn-sm" id="btnAgregarMaterial">Agregar Material</button>
+                <button class="btn btn-primary btn-sm" href="{{route('registro_mats')}}" id="btnAgregarMaterial">Agregar Material</button>
                 <input type="text" class="form-control w-25" placeholder="Buscar..." id="buscarMaterial">
             </div>
             <div class="table-responsive">
@@ -38,11 +38,11 @@
                             <tr>
                                 <td>{{ $material->idcmt }}</td>
                                 <td>
-                                    <div class="img-container" style="max-width: 100% !important; max-height: 100% !important; object-fit: cover !important; border-radius: 5px !important;">
-                                        <img src="{{ $material->imagen }}" alt="Imagen Material" style="max-width: 50%; max-height: 50%; object-fit: cover; border-radius: 5px;">
+                                    <div class="img-container" style="width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; overflow: hidden; margin: auto;">
+                                        <img src="{{ $material->imagen }}" alt="Imagen Material" style="max-width: 100px;">
                                     </div>
                                 </td>
-                                <td style="min-width: 100px; max-width: 100px;">{{ $material->nombre }}</td>
+                                <td>{{ $material->nombre }}</td>
                                 <td>{{ $material->tipoMaterial->nombre ?? 'Sin tipo asignado' }}</td>
                                 <td>{{ $material->caracteristicas }}</td>
                                 <td>{{ $material->cantidad }}</td>
