@@ -88,82 +88,82 @@
     @endif
     
     <div class="container mt-5">
-        <h2 class="text-center">Registrar Proyecto</h2>
-        <form action = "{{route('saveregisproy')}}" method= "POST">
+    <h2 class="text-center">Registrar Proyecto</h2>
+    <form action="{{ route('saveregisproy') }}" method="POST">
         {{ csrf_field() }}
-            <!-- Input Número de Cotización -->
-            <tr>
-                <td>Número de cotización</td>
-                <td><select  class="form-select" name = 'idcot'>
-                @foreach($cotizacion as $cot)
-                    <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
-                @endforeach
-	            </select>
-	        </td></tr>
-
-            <!-- Mostrar Detalles de la Cotización -->
-            <div class="mb-3">
-            <table border = 1>
         <tr>
-            <td>Número de cotizacion</td>
-            <td>Cliente</td>
-            <td>Fecha</td>
-            <td>Vigencia</td>
-            <td>Descripcion</td>
-            <td>Total</td>
+            <td>Número de cotización</td>
+            <td>
+                <select class="form-select" name='idcot' id="idcot">
+                    @foreach($cotizacion as $cot)
+                        <option value='{{$cot->idcot}}'>{{$cot->idcot}}</option>
+                    @endforeach
+                </select>
+            </td>
         </tr>
-        @if($cotizacion->idcot == $numero)
-<tr>
-    <td>{{ $cotizacion->idcot }}</td>
-    <td>{{ $cotizacion->idcli }}</td>
-    <td>{{ $cotizacion->fecha }}</td>
-    <td>{{ $cotizacion->vigencia }}</td>
-    <td>{{ $cotizacion->descripcion }}</td>
-    <td>{{ $cotizacion->total }}</td>
-</tr>
-@endif
-            </table>
-            </div>
 
-            <!-- Ingresar Fecha de Inicio -->
-            <tr>
+        <!-- Mostrar Detalles de la Cotización -->
+        <div id="cotizacion-details"></div>
+
+        <!-- Ingresar Fecha de Inicio -->
+        <tr>
             <td width=100>Fecha Inicio:</td>
             <td width=200>
-            @if($errors->first('fecha_ini'))
-                <p class="text-warning">{{$errors->first('fecha_ini')}}</p>
-            @endif
-            <input type = 'date' class="form-control" name='fecha_ini' placeholder= 'dd/mm/aaaa' value="{{old('fecha_ini')}}"></td>
-            </tr>
+                @if($errors->first('fecha_ini'))
+                    <p class="text-warning">{{$errors->first('fecha_ini')}}</p>
+                @endif
+                <input type='date' class="form-control" name='fecha_ini' placeholder='dd/mm/aaaa' value="{{old('fecha_ini')}}">
+            </td>
+        </tr>
 
-            <!-- Ingresar Fecha de Término -->
-            <tr>
+        <!-- Ingresar Fecha de Término -->
+        <tr>
             <td width=100>Fecha Termino:</td>
             <td width=200>
-            @if($errors->first('fecha_fin'))
-                <p class="text-warning">{{$errors->first('fecha_fin')}}</p>
-            @endif
-            <input type = 'date' class="form-control" name='fecha_fin' placeholder= 'dd/mm/aaaa' value="{{old('fecha_fin')}}"></td>
-            </tr>
+                @if($errors->first('fecha_fin'))
+                    <p class="text-warning">{{$errors->first('fecha_fin')}}</p>
+                @endif
+                <input type='date' class="form-control" name='fecha_fin' placeholder='dd/mm/aaaa' value="{{old('fecha_fin')}}">
+            </td>
+        </tr>
 
-            <!-- Teclear Ubicación -->
-            <tr>
+        <!-- Teclear Ubicación -->
+        <tr>
             <td width=100>Ubicacion</td>
             <td width=200>
-            @if($errors->first('Ubicacipn'))
-                <p class="text-warning">{{$errors->first('Ubicacipn')}}</p>
-            @endif
-            <input type = 'text' class="form-control" name='Ubicacipn'  value="{{old('Ubicacipn')}}"></td>
-            </tr>
+                @if($errors->first('Ubicacipn'))
+                    <p class="text-warning">{{$errors->first('Ubicacipn')}}</p>
+                @endif
+                <input type='text' class="form-control" name='Ubicacipn' value="{{old('Ubicacipn')}}">
+            </td>
+        </tr>
 
-            <!-- Botón Guardar -->
-            <div>
+        <!-- Botón Guardar -->
+        <div>
             <button type="submit" class="btn btn-primary">Guardar los Datos</button>
-            </div>
-    </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#idcot').change(function() {
+            var idcot = $(this).val();
+            $.ajax({
+                url: '/get-cotizacion-details/' + idcot, // Cambia esta URL según tu ruta
+                type: 'GET',
+                success: function(data) {
+                    $('#cotizacion-details').html(data);
+                },
+                error: function() {
+                    alert('Error al obtener los detalles de la cotización.');
+                }
+            });
+        });
+    });
+</script>
 
     
     <!-- Footer Start -->

@@ -84,7 +84,7 @@
             <!-- Seleccionar Proyecto -->
             <div class="mb-3">
             <tr>
-                <td> Seleccione un número de proyecto</td>
+                <td>Número de proyecto</td>
                 <td><select  class="form-select" name = 'idcot'>
                 @foreach($cotizacion as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
@@ -96,7 +96,7 @@
             <!-- Asignar Actividades -->
             <div class="mb-3">
                 <tr>
-                <td width=100>Asignar actividades</td>
+                <td width=100>Actividades</td>
                 <td width=200>
                 @if($errors->first('actividad'))
                     <p class="text-warning">{{$errors->first('actividad')}}</p>
@@ -105,6 +105,14 @@
                 </tr>
             </div>
 
+            <tr>
+            <td width=100>Número de cronograma:</td>
+            <td width=400>
+            @if($errors->first('idcro'))
+                <p class="text-warning">{{$errors->first('idcro')}}</p>
+            @endif
+	        <input type = 'text' class="form-control" name='idcro' placeholder='Ejemplo:1234'  value="{{$sigue}}"></td>
+            </tr>
             <!-- Establecer Fechas -->
             <div class="mb-3">
             <tr>
@@ -126,10 +134,20 @@
             <input type = 'date' class="form-control" name='fecha_ter' placeholder= 'dd/mm/aaaa' value="{{old('fecha_ter')}}"></td>
             </tr>
             </div>
+            <div class="mb-3">
+            <tr>
+            <td width=100>Estatus de la actividad</td>
+            <td width=200>
+            @if($errors->first('status'))
+                <p class="text-warning">{{$errors->first('status')}}</p>
+            @endif
+            <input type = 'text' class="form-control" name='status' placeholder= 'pendiente' value="{{old('status')}}"></td>
+            </tr>
+            </div>
 
             <!-- Asignar Personal para Actividades -->
             <tr>
-                <td> Seleccione un número de personal</td>
+                <td> Número de personal</td>
                 <td><select  class="form-select" name = 'idenc'>
                 @foreach($encargado as $enc)
                     <option value = '{{$enc->idenc}}'>{{$enc->idenc}}</option>

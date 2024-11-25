@@ -44,6 +44,11 @@ class elegarqcontroller extends Controller
                 ->with('cotizacion',$cotizacion)
                 ->with('numero',$numero);
     }
+    public function getDetails($id)
+    {
+        $cotizacion = Cotizaciones::find($id); // Asegúrate de que Cotizacion es tu modelo
+        return view('partials.cotizacion-details', compact('cotizacion'));
+    }
     public function saveregisproy(Request $request)
     {
         /*$this->validate($request,[   
@@ -66,15 +71,20 @@ class elegarqcontroller extends Controller
     }
     public function elaborar_cronograma()
     {
-        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
+        $cotizacion = Proyectos::orderby('idcot', 'asc')
                                 ->get();
 
         $encargado = Personals::orderby('idenc', 'asc')
                                 ->get();
 
+        $idultimocot = \DB::select("SELECT idcro + 1 AS nuevaclave FROM cronogramas ORDER BY idcro DESC LIMIT 1");
+
+        $sigue = $idultimocot[0]->nuevaclave;
+
         return view('elaborar_cronograma')
                 ->with('cotizacion',$cotizacion)
-                ->with('encargado',$encargado);
+                ->with('encargado',$encargado)
+                ->with('sigue',$sigue);
     }
     public function savecrono(Request $request)
     {
@@ -86,9 +96,11 @@ class elegarqcontroller extends Controller
 
         $Cronogramas = new Cronogramas;
         $Cronogramas ->idcot = $request->idcot;
+        $Cronogramas ->idcro = $request->idcro;
         $Cronogramas ->actividad = $request->actividad;
         $Cronogramas ->fecha_inicio = $request->fecha_inicio;
         $Cronogramas ->fecha_ter = $request->fecha_ter;
+        $Cronogramas ->status = $request->status;
         $Cronogramas ->idenc = $request->idenc;
         $Cronogramas ->save(); 
 
