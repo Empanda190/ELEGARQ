@@ -108,38 +108,26 @@ class elegarqcontroller extends Controller
     }
 
     //Catalogo de materiales
-    public function catalogo_mat()
-    {
-        // Consulta los materiales junto con su tipo de material (relación a tabla tipmats)
-        $materiales = Cat_Mates::with('tipmats')->get();
-
-        return view('catalogo_mat', compact('materiales'));
-    }
-
     public function registro_mats()
     {
-        // Carga los tipos de material para el formulario
-        $tipos = tipmats::all();
-
-        return view('registro_mats', compact('tipos'));
+    $tipmats = TipMats::all(); // Para el dropdown de tipos de materiales
+    return view('registro_mats', compact('tipmats'));
     }
 
-    public function guardar_mat(Request $request)
+    public function guardar_material(Request $request)
     {
-        // Validar los datos
-        $request->validate([
-            'nombre' => 'required|max:30',
-            'imagen' => 'required|url',
-            'idtma' => 'required|exists:tipmats,idtma',
-            'caracteristicas' => 'nullable|max:100',
-            'cantidad' => 'required|integer|min:0',
-            'precio' => 'required|numeric|min:0',
-        ]);
+    $request->validate([
+        'nombre' => 'nullable|string|max:30',
+        'idtma' => 'nullable|exists:tipmats,idtma',
+        'caracteristicas' => 'nullable|string|max:100',
+        'cantidad' => 'nullable|integer|min:0',
+        'precio' => 'nullable|numeric|regex:/^\d+(\.\d{1,2})?$/',
+    ], [
+        'precio.regex' => 'El precio debe tener un máximo de dos decimales.'
+    ]);
 
-        // Crear el material en la base de datos
-        Material::create($request->all());
-
-        // Redirigir con mensaje de éxito
-        return redirect()->route('registro_mats')->with('success', 'Material registrado con éxito.');
+    Cat_Mates::create($request->all());
+    return redirect()->route('registro_mats')->with('success', 'Material registrado correctamente.');
     }
+
 }

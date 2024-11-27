@@ -17,6 +17,5 @@ Route::post('saveregisproy',[elegarqcontroller::class,'saveregisproy'])->name('s
 Route::post('savecrono',[elegarqcontroller::class,'savecrono'])->name('savecrono');
 
 //Rutas del Catalogo de Materiales
-Route::get('catalogo_ma',[elegarqcontroller::class,'catalogo_mat'])->name('catalogo_mat');
-Route::get('registro_mats',[elegarqcontroller::class,'registro_mats'])->name('registro_mats');
-Route::post('guardar_mat', [MaterialController::class, 'guardar_mat'])->name('guardar_mat');
+Route::get('registro_mats', [elegarqcontroller::class, 'registro_mats'])->name('registro_mats');
+Route::post('guardar_material', [elegarqcontroller::class, 'guardar_material'])->name('guardar_material');
