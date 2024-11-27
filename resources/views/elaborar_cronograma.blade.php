@@ -77,6 +77,13 @@
             </div>
         </nav>
     </div>
+    @if (Session::has('mensaje'))
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Felicidades</strong> {{ Session::get('mensaje') }}
+    </div>
+    @endif
+    
     <div class="container mt-5">
         <h2 class="text-center">Elaborar Cronograma</h2>
         <form action = "{{route('savecrono')}}" method= "POST">

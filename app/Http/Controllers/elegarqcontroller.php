@@ -25,11 +25,7 @@ class elegarqcontroller extends Controller
     {
         return view ('index');
     }
-    public function login()
-    {
-        return view ('login');
-    }
-    public function registrar_proyecto()
+    public function registrar_proyecto(Request $request)
     {
         $cotizacion = \DB::select("SELECT idcot
         FROM cotizaciones
@@ -40,14 +36,18 @@ class elegarqcontroller extends Controller
 
         $numero = Cotizaciones::orderby('idcot', 'asc')->get();
 
+        $idcot = $request->input('idcot');
+       
+        $rp = \DB::table('cotizaciones')
+                    ->where('idcot', $idcot) 
+                    ->select('idcot', 'idcli', 'fecha', 'vigencia', 'descripcion', 'total');
+                    $rp = $rp->get();
+
         return view('registrar_proyecto')
                 ->with('cotizacion',$cotizacion)
-                ->with('numero',$numero);
-    }
-    public function getDetails($id)
-    {
-        $cotizacion = Cotizaciones::find($id); // Asegúrate de que Cotizacion es tu modelo
-        return view('partials.cotizacion-details', compact('cotizacion'));
+                ->with('numero',$numero)
+                ->with('rp',$rp);
+                
     }
     public function saveregisproy(Request $request)
     {
@@ -88,34 +88,63 @@ class elegarqcontroller extends Controller
     }
     public function savecrono(Request $request)
     {
-        /*$this->validate($request,[   
-			'actividad'=>'required',
-			'fecha_inicio'=>'required',
-            'fecha_ter'=>'required',
-        ]);*/
+        $idcot = $request->input('idcot');
+        $idenc = $request->input('idenc');
+        $idcro = $request->input('idcro');
+        $actividad = $request->input('actividad');
+        $fecha_inicio = $request->input('fecha_inicio');
+        $fecha_ter = $request->input('fecha_ter');
+        $status = $request->input('status');
 
-        $Cronogramas = new Cronogramas;
-        $Cronogramas ->idcot = $request->idcot;
-        $Cronogramas ->idcro = $request->idcro;
-        $Cronogramas ->actividad = $request->actividad;
-        $Cronogramas ->fecha_inicio = $request->fecha_inicio;
-        $Cronogramas ->fecha_ter = $request->fecha_ter;
-        $Cronogramas ->status = $request->status;
-        $Cronogramas ->idenc = $request->idenc;
-        $Cronogramas ->save(); 
+                // Insertar directamente en la base de datos
+        \DB::insert('INSERT INTO cronogramas (idcot, idenc, idcro, actividad, fecha_inicio, fecha_ter, status) VALUES (?, ?, ?, ?, ?, ?, ?)', [
+            $idcot,
+            $idenc,
+            $idcro,
+            $actividad,
+            $fecha_inicio,
+            $fecha_ter,
+            $status,
+        ]);
 
-        return response()->json([
-            'message' => 'Cronograma guardado con éxito',
-            'data' => $Cronogramas
-        ], 201);
+        // Mensaje de éxito
+        Session::flash('mensaje',"La actividad ha sido registrado exitosamente.");
+        return redirect()->route('elaborar_cronograma'); // Redirigir a la ruta de pagos
 
     }
-    public function seguir_proyecto()
+    public function seguir_proyecto(Request $request)
     {
         $proyecto = proyectos::orderby('idcot', 'asc')
                                 ->get();
 
+        $idcot = $request->input('idcot');
+        $idcro = $request->input('idcro');
+       
+        $sp = \DB::table('cronogramas')
+                    ->where('idcot', $idcot) 
+                    ->select('idcot', 'idenc', 'idcro', 'actividad', 'fecha_inicio', 'fecha_ter', 'status');
+                    $sp = $sp->get();
+
         return view('seguir_proyecto')
-                ->with('proyecto',$proyecto);
+                ->with('proyecto',$proyecto)
+                ->with('sp',$sp)
+                ->with('idcro',$idcro);
     }
+    public function completado($idcro)
+    {
+        $actualiza = \DB::update("UPDATE cronogramas
+                            SET status ='completado' WHERE idcro = ?", [$idcro]);
+
+        Session::flash("El estatus se ha actualizado");
+        return redirect()->route('seguir_proyecto');
+    }
+    public function atrasado($idcro)
+    {
+        $actualiza = \DB::update("UPDATE cronogramas
+                            SET status ='atrasado' WHERE idcro = ?", [$idcro]);
+
+        Session::flash("El estatus se ha actualizado");
+        return redirect()->route('seguir_proyecto');
+    }
+
 }

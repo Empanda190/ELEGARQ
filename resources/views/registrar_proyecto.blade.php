@@ -79,71 +79,151 @@
     </div>
     <!-- Navbar End -->
     @if (Session::has('mensaje'))
-          <div>
-        <div class="alert alert-dismissible alert-success">
+    <div class="alert alert-dismissible alert-success">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>Felicidades</strong> {{ Session::get('mensaje') }}
-        </div>
-     </div>
+    </div>
     @endif
-    
-    <div class="container mt-5">
+
+<div class="container mt-5">
     <h2 class="text-center">Registrar Proyecto</h2>
+
+    <!-- Formulario Buscar -->
+    <div class="cont-principal">
+        <form method="GET" action="{{ route('registrar_proyecto') }}">
+            {{ csrf_field() }}
+            <label for="idcot">Número de Cotizacion que desea buscar:</label>
+            <input type="text" class="form-control" name="idcot" value="{{ request('idcot') }}">
+            <button type="submit" class="btn-buscar">Buscar</button>
+        </form>
+    </div>
+
+    <!-- Tabla de Reporte -->
+    <table id="tablaAvances">
+        <thead>
+            <tr>
+                <th>Número de cotización</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Vigencia</th>
+                <th>Descripción</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($rp as $a)
+                <tr>
+                    <td>{{ $a->idcot }}</td>
+                    <td>{{ $a->idcli }}</td>
+                    <td>{{ $a->fecha }}</td>
+                    <td>{{ $a->vigencia }}</td>
+                    <td>{{ $a->descripcion }}</td>
+                    <td>{{ $a->total }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <style>
+    .cont-principal {
+        margin: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn-buscar, .btn-impr {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+    }
+
+    .btn-buscar {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-impr {
+        background-color: #28a745;
+        color: white;
+    }
+
+    #tablaAvances {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    #tablaAvances th, #tablaAvances td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #tablaAvances th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    #tablaAvances tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    #tablaAvances tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+    <!-- Formulario Guardar -->
     <form action="{{ route('saveregisproy') }}" method="POST">
         {{ csrf_field() }}
-        <tr>
-            <td>Número de cotización</td>
-            <td>
-                <select class="form-select" name='idcot' id="idcot">
-                    @foreach($cotizacion as $cot)
-                        <option value='{{$cot->idcot}}'>{{$cot->idcot}}</option>
-                    @endforeach
-                </select>
-            </td>
-        </tr>
-
-        <!-- Mostrar Detalles de la Cotización -->
-        <div id="cotizacion-details"></div>
-
-        <!-- Ingresar Fecha de Inicio -->
-        <tr>
-            <td width=100>Fecha Inicio:</td>
-            <td width=200>
-                @if($errors->first('fecha_ini'))
-                    <p class="text-warning">{{$errors->first('fecha_ini')}}</p>
-                @endif
-                <input type='date' class="form-control" name='fecha_ini' placeholder='dd/mm/aaaa' value="{{old('fecha_ini')}}">
-            </td>
-        </tr>
-
-        <!-- Ingresar Fecha de Término -->
-        <tr>
-            <td width=100>Fecha Termino:</td>
-            <td width=200>
-                @if($errors->first('fecha_fin'))
-                    <p class="text-warning">{{$errors->first('fecha_fin')}}</p>
-                @endif
-                <input type='date' class="form-control" name='fecha_fin' placeholder='dd/mm/aaaa' value="{{old('fecha_fin')}}">
-            </td>
-        </tr>
-
-        <!-- Teclear Ubicación -->
-        <tr>
-            <td width=100>Ubicacion</td>
-            <td width=200>
-                @if($errors->first('Ubicacipn'))
-                    <p class="text-warning">{{$errors->first('Ubicacipn')}}</p>
-                @endif
-                <input type='text' class="form-control" name='Ubicacipn' value="{{old('Ubicacipn')}}">
-            </td>
-        </tr>
-
-        <!-- Botón Guardar -->
         <div>
-            <button type="submit" class="btn btn-primary">Guardar los Datos</button>
+            <label for="idcot">Número de cotización disponible:</label>
+            <select class="form-select" name="idcot" id="idcot">
+                @foreach($cotizacion as $cot)
+                    <option value="{{ $cot->idcot }}">{{ $cot->idcot }}</option>
+                @endforeach
+            </select>
         </div>
+
+        <div>
+            <label for="fecha_ini">Fecha Inicio:</label>
+            @if($errors->first('fecha_ini'))
+                <p class="text-warning">{{ $errors->first('fecha_ini') }}</p>
+            @endif
+            <input type="date" class="form-control" name="fecha_ini" value="{{ old('fecha_ini') }}">
+        </div>
+
+        <div>
+            <label for="fecha_fin">Fecha Término:</label>
+            @if($errors->first('fecha_fin'))
+                <p class="text-warning">{{ $errors->first('fecha_fin') }}</p>
+            @endif
+            <input type="date" class="form-control" name="fecha_fin" value="{{ old('fecha_fin') }}">
+        </div>
+
+        <div>
+            <label for="Ubicacipn">Ubicación:</label>
+            @if($errors->first('Ubicacipn'))
+                <p class="text-warning">{{ $errors->first('Ubicacipn') }}</p>
+            @endif
+            <input type="text" class="form-control" name="Ubicacipn" value="{{ old('Ubicacipn') }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar los Datos</button>
     </form>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

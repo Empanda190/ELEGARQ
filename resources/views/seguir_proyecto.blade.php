@@ -84,7 +84,7 @@
         <form>
             <!-- Seleccionar Proyecto -->
             <tr>
-                <td> Número de cotización</td>
+                <td>Números disponibles de proyectos</td>
                 <td><select  class="form-select" name = 'idcot'>
                 @foreach($proyecto as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
@@ -93,34 +93,118 @@
 	        </td></tr>
 
             <!-- Mostrar Cronograma -->
-            <div class="mb-3">
-            <table border = 1>
-        <tr>
-            <td>Número de cotizacion</td>
-            <td>Encargado</td>
-            <td>Fecha Inicio</td>
-            <td>Fecha Termino</td>
-            <td>Status</td>
-            <td>Actualizar</td>
-        </tr>
-        @foreach($proyecto as $e)
-        <tr>
-            <td>{{$e->idcot}}</td>
-            <td>{{$e->idenc}}</td>
-            <td>{{$e->fecha_ini}}</td>
-            <td>{{$e->fecha_fin}}</td>
-            <td>{{$e->status}}</td>
-            <td>
-            @endforeach
-            </table>
-            </div>
-            <!-- Botón Guardar -->
-             <div>
-            <button type="submit" class="btn btn-primary">Guardar Información</button>
-            </div>
-        </form>
-    </div>
+            <div class="cont-principal">
 
+            <form method="GET" action="{{ route('seguir_proyecto') }}">
+                <label for="idcot">Numero de Proyecto:</label>
+                <input type="text" class="form-control" name="idcot" value="{{ request('idcot') }}">
+            </form>
+                <button type="submit" class="btn-buscar">Buscar</button>
+            <!-- Tabla dek Cronograma -->
+        <table id="tablaAvances">
+    <thead>
+        <tr>
+            <th>Número de cotizacion</th>
+            <th>Número de encargado</th>
+            <th>Número de cronograma</th>
+            <th>Fecha de inicio</th>
+            <th>Fecha de termino</th>
+            <th>Estatus</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($sp as $a)
+            <tr>
+                <td>{{ $a->idcot }}</td>
+                <td>{{ $a->idenc }}</td>
+                <td>{{ $a->idcro }}</td>
+                <td>{{ $a->fecha_inicio }}</td>
+                <td>{{ $a->fecha_ter }}</td>
+                <td>{{ $a->status }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
+
+<style>
+.cont-principal {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-buscar, .btn-impr {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn-buscar {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-impr {
+    background-color: #28a745;
+    color: white;
+}
+
+#tablaAvances {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tablaAvances th, #tablaAvances td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#tablaAvances th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+#tablaAvances tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#tablaAvances tr:hover {
+    background-color: #f1f1f1;
+}
+</style>
+    <tr>
+        <label for="idcro">Número de cronograma a actualizar</td>
+        <td width=200>
+        <input type = 'text' class="form-control" name='idcro' value="{{$idcro}}"></td>
+    </tr>
+        <div>
+        @if('idcro')
+            <td width=100>Estatus completado</td>
+            <a href ="{{ route('completado',['idcro' => $idcro]) }}">
+            <button type="button" class="btn btn-primary">COMPLETADO</button>
+            </a>
+            <td width=100>Estatus atrasado</td>
+            <a href ="{{ route('atrasado',['idcro' => $idcro]) }}">
+            <button type="button" class="btn btn-danger">ATRASADO</button>
+            </a>
+        @endif
+        </div>
+    </div>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
