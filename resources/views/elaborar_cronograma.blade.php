@@ -83,12 +83,12 @@
         <strong>Felicidades</strong> {{ Session::get('mensaje') }}
     </div>
     @endif
-    
+
     <div class="container mt-5">
         <h2 class="text-center">Elaborar Cronograma</h2>
         <form action = "{{route('savecrono')}}" method= "POST">
         {{ csrf_field() }}
-            <!-- Seleccionar Proyecto -->
+            <!-- Bloque para seleccionar el número de proyecto -->
             <div class="mb-3">
             <tr>
                 <td>Número de proyecto</td>
@@ -100,24 +100,27 @@
 	        </td></tr>
             </div>
 
-            <!-- Asignar Actividades -->
+            <!-- Bloque para ingresar actividades -->
             <div class="mb-3">
                 <tr>
                 <td width=100>Actividades</td>
                 <td width=200>
+                <!-- Mostrar error si existe -->
                 @if($errors->first('actividad'))
                     <p class="text-warning">{{$errors->first('actividad')}}</p>
                 @endif
+                <!-- Campo de texto para la actividad -->
                 <input type = 'text' class="form-control" name='actividad' placeholder= 'Ingresa una actividad' value="{{old('actividad')}}" rows="3"></td>
                 </tr>
             </div>
-
+            <!-- Campo para número de cronograma -->
             <tr>
             <td width=100>Número de cronograma:</td>
             <td width=400>
             @if($errors->first('idcro'))
                 <p class="text-warning">{{$errors->first('idcro')}}</p>
             @endif
+            <!-- Campo de texto para el cronograma -->
 	        <input type = 'text' class="form-control" name='idcro' placeholder='Ejemplo:1234'  value="{{$sigue}}"></td>
             </tr>
             <!-- Establecer Fechas -->
@@ -128,19 +131,23 @@
             @if($errors->first('fecha_inicio'))
                 <p class="text-warning">{{$errors->first('fecha_inicio')}}</p>
             @endif
+            <!-- Campo de entrada para fecha de inicio -->
             <input type = 'date' class="form-control" name='fecha_inicio' placeholder= 'dd/mm/aaaa' value="{{old('fecha_inicio')}}"></td>
             </tr>
             </div>
             <div class="mb-3">
             <tr>
+            <!-- Fecha de término -->
             <td width=100>Fecha de termino</td>
             <td width=200>
             @if($errors->first('fecha_ter'))
                 <p class="text-warning">{{$errors->first('fecha_ter')}}</p>
             @endif
+            <!-- Campo de entrada para fecha de término -->
             <input type = 'date' class="form-control" name='fecha_ter' placeholder= 'dd/mm/aaaa' value="{{old('fecha_ter')}}"></td>
             </tr>
             </div>
+            <!-- Bloque para estatus de la actividad -->
             <div class="mb-3">
             <tr>
             <td width=100>Estatus de la actividad</td>
@@ -148,13 +155,16 @@
             @if($errors->first('status'))
                 <p class="text-warning">{{$errors->first('status')}}</p>
             @endif
+            <!-- Campo de entrada para el estatus -->
             <input type = 'text' class="form-control" name='status' placeholder= 'pendiente' value="{{old('status')}}"></td>
             </tr>
             </div>
 
             <!-- Asignar Personal para Actividades -->
             <tr>
+                <!-- Etiqueta para seleccionar número de personal -->
                 <td> Número de personal</td>
+                <!-- Menú desplegable con las opciones de personal -->
                 <td><select  class="form-select" name = 'idenc'>
                 @foreach($encargado as $enc)
                     <option value = '{{$enc->idenc}}'>{{$enc->idenc}}</option>

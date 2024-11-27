@@ -80,29 +80,35 @@
     <!-- Navbar End -->
 
     <div class="container mt-5">
+        <!-- Inicio del formulario principal -->
         <h2 class="text-center">Seguir Proyecto</h2>
         <form>
-            <!-- Seleccionar Proyecto -->
             <tr>
+                <!-- Etiqueta indicando la selección de proyectos disponibles -->
                 <td>Números disponibles de proyectos</td>
+                <!-- Menú desplegable para seleccionar un proyecto -->
                 <td><select  class="form-select" name = 'idcot'>
+                <!-- Iteración para listar los proyectos disponibles -->
                 @foreach($proyecto as $cot)
                     <option value = '{{$cot->idcot}}'>{{$cot->idcot}}</option>
                 @endforeach
 	            </select>
 	        </td></tr>
 
-            <!-- Mostrar Cronograma -->
+            <!-- Contenedor para mostrar el cronograma -->
             <div class="cont-principal">
 
+            <!-- Formulario GET para buscar un proyecto específico -->
             <form method="GET" action="{{ route('seguir_proyecto') }}">
                 <label for="idcot">Numero de Proyecto:</label>
                 <input type="text" class="form-control" name="idcot" value="{{ request('idcot') }}">
             </form>
+                <!-- Botón para buscar el cronograma -->
                 <button type="submit" class="btn-buscar">Buscar</button>
-            <!-- Tabla dek Cronograma -->
+        <!-- Tabla para mostrar el cronograma del proyecto -->
         <table id="tablaAvances">
     <thead>
+        <!-- Encabezado de la tabla -->
         <tr>
             <th>Número de cotizacion</th>
             <th>Número de encargado</th>
@@ -112,6 +118,7 @@
             <th>Estatus</th>
         </tr>
     </thead>
+    <!-- Cuerpo de la tabla con datos dinámicos -->
     <tbody>
         @foreach($sp as $a)
             <tr>
@@ -126,7 +133,7 @@
     </tbody>
 </table>
 </div>
-
+<!-- Estilos personalizados -->
 <style>
 .cont-principal {
     margin: 20px;
@@ -187,6 +194,7 @@ form {
     background-color: #f1f1f1;
 }
 </style>
+<!-- Bloque para actualizar un cronograma -->
     <tr>
         <label for="idcro">Número de cronograma a actualizar</td>
         <td width=200>

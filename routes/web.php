@@ -15,8 +15,8 @@ Route::get('elaborar_cronograma',[elegarqcontroller::class,'elaborar_cronograma'
 Route::get('seguir_proyecto',[elegarqcontroller::class,'seguir_proyecto'])->name('seguir_proyecto');
 Route::post('saveregisproy',[elegarqcontroller::class,'saveregisproy'])->name('saveregisproy');
 Route::post('savecrono',[elegarqcontroller::class,'savecrono'])->name('savecrono');
-Route::get('completado}',[elegarqcontroller::class,'completado'])->name('completado');
-Route::get('atrasado}',[elegarqcontroller::class,'atrasado'])->name('atrasado');
+Route::get('completado',[elegarqcontroller::class,'completado'])->name('completado');
+Route::get('atrasado',[elegarqcontroller::class,'atrasado'])->name('atrasado');
 
 
 
