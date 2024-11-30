@@ -10,6 +10,7 @@ class tipmats extends Model
     use HasFactory;
     
     protected $table = 'tipmats';
+    public $timestamps = false;
     protected $fillable = ['nombre'];
 
     public function catMates()

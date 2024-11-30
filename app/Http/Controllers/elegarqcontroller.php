@@ -16,118 +16,103 @@ use App\Models\Proyectos;
 use App\Models\Registro_Mats;
 use App\Models\Registro_Pagos;
 use App\Models\Servicios;
-use App\Models\TipMats;
-
+use App\Models\tipmats;
 use Session;
+
 class elegarqcontroller extends Controller
 {
     public function index()
     {
         return view ('index');
     }
-    public function login()
+
+
+
+
+    /*Título: Proyecto despacho de arquitectos
+    Autor: Berenice Morales Bustamante  Grupo: 7A
+    Fecha de creación: 21 de noviembre del 2024 - 22:48 - 02:04
+    Última actualización: 27 de noviembre del 2024 - 20:12 - 01:23*/
+    //CATÁLOGO DE MATERIALES
+
+    public function catalogo_mat()
     {
-        return view ('login');
-    }
-    public function registrar_proyecto()
-    {
-        $cotizacion = \DB::select("SELECT idcot
-        FROM cotizaciones
-        WHERE idcot NOT IN (
-            SELECT idcot
-            FROM proyectos
-        )");
+    // Consulta los materiales junto con su tipo de material (relación con tipmats)
+    $materiales = Cat_Mates::with('tipmats')->get(); // Usar 'tipmats' en vez de 'tipmat'
 
-        $numero = Cotizaciones::orderby('idcot', 'asc')->get();
-
-        return view('registrar_proyecto')
-                ->with('cotizacion',$cotizacion)
-                ->with('numero',$numero);
-    }
-    public function saveregisproy(Request $request)
-    {
-        /*$this->validate($request,[   
-            'idcot'=>'required|numeric|integer',
-			'fecha_ini'=>'required',
-			'fecha_fin'=>'required',
-            'Ubicacipn'=>'required',
-        ]);*/
-
-        $Proyectos = new Proyectos;
-        $Proyectos ->idcot = $request->idcot;
-        $Proyectos ->fecha_ini = $request->fecha_ini;
-        $Proyectos ->fecha_fin = $request->fecha_fin;
-        $Proyectos ->Ubicacipn = $request->Ubicacipn;
-        $Proyectos ->save(); 
-
-        Session::flash('mensaje', "La cotizacion número $request->idcot ha sido registrada dentro de proyectos");
-        return redirect()->route('registrar_proyecto');
-
-    }
-    public function elaborar_cronograma()
-    {
-        $cotizacion = Cotizaciones::orderby('idcot', 'asc')
-                                ->get();
-
-        $encargado = Personals::orderby('idenc', 'asc')
-                                ->get();
-
-        return view('elaborar_cronograma')
-                ->with('cotizacion',$cotizacion)
-                ->with('encargado',$encargado);
-    }
-    public function savecrono(Request $request)
-    {
-        /*$this->validate($request,[   
-			'actividad'=>'required',
-			'fecha_inicio'=>'required',
-            'fecha_ter'=>'required',
-        ]);*/
-
-        $Cronogramas = new Cronogramas;
-        $Cronogramas ->idcot = $request->idcot;
-        $Cronogramas ->actividad = $request->actividad;
-        $Cronogramas ->fecha_inicio = $request->fecha_inicio;
-        $Cronogramas ->fecha_ter = $request->fecha_ter;
-        $Cronogramas ->idenc = $request->idenc;
-        $Cronogramas ->save(); 
-
-        return response()->json([
-            'message' => 'Cronograma guardado con éxito',
-            'data' => $Cronogramas
-        ], 201);
-
-    }
-    public function seguir_proyecto()
-    {
-        $proyecto = proyectos::orderby('idcot', 'asc')
-                                ->get();
-
-        return view('seguir_proyecto')
-                ->with('proyecto',$proyecto);
+    return view('catalogo_mat', compact('materiales'));
     }
 
-    //Catalogo de materiales
+
+    //Muestra la vista del formulario de registro de materiales
     public function registro_mats()
     {
     $tipmats = TipMats::all(); // Para el dropdown de tipos de materiales
     return view('registro_mats', compact('tipmats'));
     }
 
+    //Metodo para guardar la informacion del formulario en la base de datos
     public function guardar_material(Request $request)
     {
-    $request->validate([
-        'nombre' => 'nullable|string|max:30',
-        'idtma' => 'nullable|exists:tipmats,idtma',
-        'caracteristicas' => 'nullable|string|max:100',
-        'cantidad' => 'nullable|integer|min:0',
-        'precio' => 'nullable|numeric|regex:/^\d+(\.\d{1,2})?$/',
-    ], [
+    $request->validate([ //Para validar los datos antes de guardarlos
+        'nombre' => 'required|string|max:30',
+        'idtma' => 'required|exists:tipmats,idtma',
+        'caracteristicas' => 'required|string|max:100',
+        'cantidad' => 'required|integer|min:0',
+        'precio' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+    ], [ //Para que no falte ningun dato por llenar
+        'nombre.required' => 'El nombre del material es obligatorio.',
+        'idtma.required' => 'Debe seleccionar un tipo de material.',
+        'caracteristicas.required' => 'Las características son obligatorias.',
+        'cantidad.required' => 'La cantidad es obligatoria.',
+        'precio.required' => 'El precio es obligatorio.',
         'precio.regex' => 'El precio debe tener un máximo de dos decimales.'
     ]);
 
-    Cat_Mates::create($request->all());
-    return redirect()->route('registro_mats')->with('success', 'Material registrado correctamente.');
+    try { //Muestra un mensaje de exito o de error
+        Cat_Mates::create($request->all());
+        return redirect()->route('registro_mats')->with('success', 'El material se registró correctamente.');
+    } catch (\Exception $e) {
+        return redirect()->route('registro_mats')->with('error', 'Ocurrió un error al registrar el material. Inténtelo nuevamente.');
+    }
+    }
+
+    public function destroy($id)
+    {
+    // Buscar el material por su ID
+    $material = Cat_Mates::findOrFail($id);
+
+    // Eliminar el material
+    $material->delete();
+
+    // Agregar mensaje de éxito en la sesión
+    session()->flash('success', 'El material ha sido eliminado exitosamente.');
+
+    // Redirigir de vuelta a la vista de catálogo
+    return redirect()->route('catalogo_mat');
+    }
+
+    public function edit($idcmt)
+    {
+        $material = Cat_Mates::findOrFail($idcmt); // Busca el material por su id
+        $tipmats = tipmats::all(); // Obtén todos los tipos de materiales para el dropdown
+        return view('edit_material', compact('material', 'tipmats'));
+    }
+
+    public function update(Request $request, $idcmt)
+    {
+        $request->validate([
+            'nombre' => 'required|max:30',
+            'idtma' => 'required|exists:tipmats,idtma',
+            'caracteristicas' => 'required|max:100',
+            'cantidad' => 'required|integer',
+            'precio' => 'required|numeric|min:0',
+        ]);
+
+        $material = Cat_Mates::findOrFail($idcmt);
+        $material->update($request->all());
+
+        return redirect()->route('catalogo_mat')->with('success', 'Material actualizado correctamente');
     }
 
 }
