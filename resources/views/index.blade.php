@@ -67,6 +67,7 @@
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="seguir_proyecto" class="dropdown-item">Seguimiento de Proyectos</a>
                             <a href="registrar_proyecto" class="dropdown-item">Registro de Proyectos</a>
+                            <a href="asignar_material" class="dropdown-item">Asignación de materiales</a>
                         </div>
                     </div>
                     <div>

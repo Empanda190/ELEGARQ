@@ -32,7 +32,8 @@ class elegarqcontroller extends Controller
     /*Título: Proyecto despacho de arquitectos
     Autor: Berenice Morales Bustamante  Grupo: 7A
     Fecha de creación: 21 de noviembre del 2024 - 22:48 - 02:04
-    Última actualización: 27 de noviembre del 2024 - 20:12 - 01:23*/
+    Última actualización: 30 de noviembre del 2024 - 14:38 - 15:12*/
+
     //CATÁLOGO DE MATERIALES
 
     public function catalogo_mat()
@@ -115,4 +116,35 @@ class elegarqcontroller extends Controller
         return redirect()->route('catalogo_mat')->with('success', 'Material actualizado correctamente');
     }
 
+    //ASIGNACION DE MATERIALES
+
+    // Mostrar la lista de proyectos y materiales
+    public function asignar_material()
+    {
+        $proyectos = Proyectos::all(); // Obtener todos los proyectos
+        $materiales = Cat_Mates::all(); // Obtener todos los materiales
+        return view('asignar_material', compact('proyectos', 'materiales'));
+    }
+
+    // Guardar asignación de materiales
+    public function guardar_asignacion(Request $request)
+    {
+        $validated = $request->validate([
+            'idcot' => 'required|exists:proyectos,idcot',
+            'materiales' => 'required|array',
+            'materiales.*.idcmt' => 'required|exists:cat_mates,idcmt',
+            'materiales.*.cant' => 'required|integer|min:1',
+            'materiales.*.precio' => 'required|numeric|min:0',
+        ]);
+
+        foreach ($validated['materiales'] as $material) {
+            // Insertar solo si no existe esta combinación
+            Registro_Mats::updateOrCreate(
+                ['idcot' => $validated['idcot'], 'idcmt' => $material['idcmt']],
+                ['cant' => $material['cant'], 'precio' => $material['precio']]
+            );
+        }
+
+        return redirect()->back()->with('success', 'Materiales asignados correctamente.');
+    }
 }
