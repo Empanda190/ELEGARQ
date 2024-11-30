@@ -1,3 +1,8 @@
+<!-- Título: Proyecto despacho de arquitectos
+Autor: Berenice Morales Bustamante  Grupo: 7A
+Fecha de creación: 21 de noviembre del 2024 - 22:48 - 02:04
+Última actualización: 27 de noviembre del 2024 - 20:12 - 01:23 -->
+
 @extends('principal')
 @section('contenido')
 

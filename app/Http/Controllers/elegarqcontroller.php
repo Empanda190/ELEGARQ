@@ -92,11 +92,11 @@ class elegarqcontroller extends Controller
     return redirect()->route('catalogo_mat');
     }
 
-    public function edit($idcmt)
+    public function editarmaterial($idcmt)
     {
         $material = Cat_Mates::findOrFail($idcmt); // Busca el material por su id
         $tipmats = tipmats::all(); // Obtén todos los tipos de materiales para el dropdown
-        return view('edit_material', compact('material', 'tipmats'));
+        return view('editarmaterial', compact('material', 'tipmats'));
     }
 
     public function update(Request $request, $idcmt)

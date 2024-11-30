@@ -50,7 +50,7 @@ Fecha de creación: 21 de noviembre del 2024 - 22:48 - 02:04
                                 <td>${{ number_format($material->precio, 2) }}</td>
                                 <td class="align-middle" style="white-space: nowrap;">
                                     <!-- Botón para Editar con ícono -->
-                                    <a href="{{ route('editar_material', $material->idcmt) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('editarmaterial', $material->idcmt) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i> <!-- Icono de edición -->
                                     </a>
                                     
