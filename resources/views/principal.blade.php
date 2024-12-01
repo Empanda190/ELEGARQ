@@ -21,6 +21,9 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!-- Bootstrap Bundle JS (incluye Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -50,21 +53,18 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="index" class="nav-item nav-link">Inicio</a>
-                    <a href="about.html" class="nav-item nav-link">Cotización</a>
+                    <a href="{{route('index')}}" class="nav-item nav-link">Inicio</a>
+                    <a href="#" class="nav-item nav-link">Cotización</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Cátalogos</a>
                         <div class="dropdown-menu rounded-0 m-0">
                             <a href="{{route('catalogo_mat')}}" class="dropdown-item">Materiales</a>
-                            <a href="single.html" class="dropdown-item">Proveedores </a>
                         </div>
                     </div>
-                    <a href="service.html" class="nav-item nav-link">Registro de Pagos</a>
+                    <a href="#" class="nav-item nav-link">Registro de Pagos</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Proyectos</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="seguir_proyecto" class="dropdown-item">Seguimiento de Proyectos</a>
-                            <a href="registrar_proyecto" class="dropdown-item">Registro de Proyectos</a>
                             <a href="asignar_material" class="dropdown-item">Asignación de materiales</a>
                         </div>
                     </div>

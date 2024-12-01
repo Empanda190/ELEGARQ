@@ -21,6 +21,11 @@ use Session;
 
 class elegarqcontroller extends Controller
 {
+    public function principal()
+    {
+        return view ('principal');
+    }
+    
     public function index()
     {
         return view ('index');
@@ -32,7 +37,7 @@ class elegarqcontroller extends Controller
     /*Título: Proyecto despacho de arquitectos
     Autor: Berenice Morales Bustamante  Grupo: 7A
     Fecha de creación: 21 de noviembre del 2024 - 22:48 - 02:04
-    Última actualización: 30 de noviembre del 2024 - 14:38 - 15:12*/
+    Última actualización: 30 de noviembre del 2024 - 17:09 - 17:32*/
 
     //CATÁLOGO DE MATERIALES
 
@@ -133,16 +138,34 @@ class elegarqcontroller extends Controller
             'idcot' => 'required|exists:proyectos,idcot',
             'materiales' => 'required|array',
             'materiales.*.idcmt' => 'required|exists:cat_mates,idcmt',
-            'materiales.*.cant' => 'required|integer|min:1',
-            'materiales.*.precio' => 'required|numeric|min:0',
         ]);
 
+        $mensajes = []; // Array para almacenar mensajes de error
+
         foreach ($validated['materiales'] as $material) {
-            // Insertar solo si no existe esta combinación
-            Registro_Mats::updateOrCreate(
-                ['idcot' => $validated['idcot'], 'idcmt' => $material['idcmt']],
-                ['cant' => $material['cant'], 'precio' => $material['precio']]
-            );
+            $existe = Registro_Mats::where('idcot', $validated['idcot'])
+                ->where('idcmt', $material['idcmt'])
+                ->exists();
+
+            if ($existe) {
+                // Si ya existe, añadir mensaje de advertencia al array
+                $mensajes[] = "El material con ID {$material['idcmt']} ya fue asignado al proyecto.";
+            } else {
+                // Si no existe, guardarlo
+                Registro_Mats::create([
+                    'idcot' => $validated['idcot'],
+                    'idcmt' => $material['idcmt'],
+                    'cant' => Cat_Mates::find($material['idcmt'])->cantidad,
+                    'precio' => Cat_Mates::find($material['idcmt'])->precio,
+                ]);
+            }
+        }
+
+        // Verificar si hubo mensajes de error
+        if (!empty($mensajes)) {
+            return redirect()->back()
+                ->with('success', 'Algunos materiales se asignaron correctamente.')
+                ->with('warnings', $mensajes); // Pasar mensajes de advertencia
         }
 
         return redirect()->back()->with('success', 'Materiales asignados correctamente.');

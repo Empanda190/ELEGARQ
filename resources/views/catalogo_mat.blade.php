@@ -14,6 +14,20 @@ Fecha de creación: 21 de noviembre del 2024 - 22:48 - 02:04
             {{ session('success') }}
         </div>
     @endif
+
+    <!-- Mensajes de advertencia -->
+    @if (session('warnings'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Advertencia:</strong>
+            <ul>
+                @foreach (session('warnings') as $warning)
+                    <li>{{ $warning }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    
     <div class="card shadow-sm p-4">
         @if ($materiales->isEmpty())
             <div class="text-center p-5">
